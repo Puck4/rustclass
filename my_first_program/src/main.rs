@@ -1,4 +1,7 @@
 fn main() {
-    println!("Hello, Sam! To the moon");
-    println!("Hello, Juan! To the moon");
+    let x = 5;
+    println!("{}", x);
+    let x = 6;
+    println!("{}", x);
+
 }
