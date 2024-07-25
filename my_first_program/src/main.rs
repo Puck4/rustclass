@@ -1,3 +1,35 @@
-fn main() {
-    
+use std::process::Command;
+
+fn executing_os_commands_linux(command_full:&str) {
+
+    let parts: Vec<&str> = command_full.split_whitespace().collect();
+    let actual_command = parts[0];
+    let arg1 = parts[1];
+
+    let output = Command::new(actual_command)
+        .arg(arg1)
+        .output()
+        .unwrap();
+
+    println!("Command output: {}", String::from_utf8_lossy(&output.stdout));
+}
+
+use std::io;
+use std::io::Read;
+use std::io::Write;
+
+fn accept_linux_command_from_user() -> String{
+    let mut res = String::new();
+    print!("What's a linux command you want to execute? ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut res).unwrap();
+    res.trim().to_string()
+}
+
+fn main(){
+
+    let full_command:String = accept_linux_command_from_user();
+    executing_os_commands_linux(&full_command);
+    executing_os_commands_linux("echo hello");
+    executing_os_commands_linux("ls -la");
 }
