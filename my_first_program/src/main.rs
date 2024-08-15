@@ -41,6 +41,10 @@ struct Usage {
     total_tokens: u32,
 }
 
+fn get_user_input() -> string {
+    "How to write a binary search in rust? fn binary_search (vec) -> i32" to_string()
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Load environment variables from .env file
     dotenv().ok();
@@ -80,7 +84,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .send_json(&payload)?;
 
     // Handle the response
-    match response.into_json::<ResponsePayload>() {
+    let resposne_from_server = match response.into_json::<ResponsePayload>() {
         Ok(response_payload) => {
             if let Some(choice) = response_payload.choices.first() {
                 println!("Generated text: {}", choice.message.content);
